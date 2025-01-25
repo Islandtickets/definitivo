@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Island Tickets</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #ff6600;
-            --secondary-color: #222;
-            --text-color: #fff;
-            --background-color: #000;
+            --primary-color: #6C63FF;
+            --secondary-color: #2E2C54;
+            --text-color: #f8f8f8;
+            --background-color: #1A1A40;
+            --accent-color: #FFB800;
         }
         body {
             margin: 0;
             padding: 0;
             background-color: var(--background-color);
             color: var(--text-color);
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Playfair Display', serif;
             display: grid;
             grid-template-rows: auto 1fr auto;
             grid-template-areas:
@@ -32,6 +33,15 @@
             color: var(--text-color);
             text-align: center;
             padding: 20px 0;
+        }
+        header h1 {
+            font-size: 50px;
+            margin: 0;
+        }
+        header p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            color: var(--accent-color);
         }
         main {
             grid-area: main;
@@ -51,7 +61,7 @@
             font-size: 14px;
         }
         h1 {
-            font-size: 50px;
+            font-size: 40px;
             margin-bottom: 20px;
         }
         .ticket-image {
@@ -68,12 +78,12 @@
             font-size: 20px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
         .buy-button:hover {
-            background-color: #cc5200;
+            background-color: var(--accent-color);
             transform: scale(1.05);
         }
         .form-container {
@@ -81,22 +91,25 @@
             flex-direction: column;
             gap: 10px;
             margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
         }
         input {
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
-            border: none;
+            border: 1px solid var(--primary-color);
+            background-color: #f8f8f8;
         }
         #paypal-button-container {
             min-height: 50px;
         }
         @media (max-width: 768px) {
             h1 {
-                font-size: 30px;
+                font-size: 28px;
             }
             .ticket-image {
-                width: 80%;
+                width: 90%;
             }
             .form-container input {
                 font-size: 14px;
@@ -112,6 +125,7 @@
 <body>
     <header>
         <h1>Island Tickets</h1>
+        <p>Compra un ticket e vinci un iPhone 16 Pro!</p>
     </header>
     <main>
         <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/47045016-vuoto-biglietto-icona-che-rappresentano-evento-iscrizione-o-lotteria-vettoriale.jpg" alt="Biglietto della lotteria" class="ticket-image">
