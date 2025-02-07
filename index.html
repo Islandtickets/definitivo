@@ -109,7 +109,7 @@
             to { opacity: 1; }
         }
     </style>
-    <script src="https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&currency=EUR&components=buttons"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&currency=EUR&components=buttons,funding-card" onload="paypalLoaded()" onerror="console.error('Errore nel caricamento di PayPal SDK')"></script>
 </head>
 <body>
     <header>
@@ -131,37 +131,42 @@
         <p>© 2025 Island Tickets. Tutti i diritti riservati.</p>
     </footer>
     <script>
-        function renderPayPalButtons() {
-            if (typeof paypal !== 'undefined') {
-                console.log("PayPal SDK rilevato. Renderizzazione pulsante...");
-                paypal.Buttons({
-                    style: {
-                        layout: 'vertical',
-                        color: 'blue',
-                        shape: 'rect',
-                        label: 'pay'
-                    },
-                    createOrder: function(data, actions) {
-                        return actions.order.create({
-                            purchase_units: [{
-                                amount: {
-                                    value: '10.00' // Prezzo del biglietto
-                                }
-                            }]
-                        });
-                    },
-                    onApprove: function(data, actions) {
-                        return actions.order.capture().then(function(details) {
-                            alert('Pagamento completato con successo da ' + details.payer.name.given_name);
-                        });
-                    }
-                }).render('#paypal-button-container');
-            } else {
-                console.error("PayPal SDK non caricato.");
-            }
+        function paypalLoaded() {
+            console.log("PayPal SDK caricato con successo.");
+            renderPayPalButtons();
         }
-        document.addEventListener("DOMContentLoaded", renderPayPalButtons);
+
+        function renderPayPalButtons() {
+            setTimeout(() => {
+                if (typeof paypal !== 'undefined') {
+                    console.log("PayPal SDK rilevato. Renderizzazione pulsante...");
+                    paypal.Buttons({
+                        style: {
+                            layout: 'vertical',
+                            color: 'blue',
+                            shape: 'rect',
+                            label: 'pay'
+                        },
+                        createOrder: function(data, actions) {
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: '10.00'
+                                    }
+                                }]
+                            });
+                        },
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(details) {
+                                alert('Pagamento completato con successo da ' + details.payer.name.given_name);
+                            });
+                        }
+                    }).render('#paypal-button-container');
+                } else {
+                    console.error("PayPal SDK non caricato.");
+                }
+            }, 2000);
+        }
     </script>
 </body>
 </html>
-
