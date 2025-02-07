@@ -1,26 +1,67 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Island Tickets</title>
+    <title>Prova Amex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #2E2C54;
+            --text-color: #f8f8f8;
+            --background-color: #1A1A40;
+            --accent-color: #FFB800;
+        }
         body {
             margin: 0;
             padding: 0;
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Playfair Display', serif;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+                "header"
+                "main"
+                "footer";
+            height: 100vh;
+        }
+        header {
+            grid-area: header;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 20px 0;
+        }
+        header h1 {
+            font-size: 50px;
+            margin: 0;
+        }
+        header p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            color: var(--accent-color);
+        }
+        main {
+            grid-area: main;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            padding: 20px;
             text-align: center;
         }
+        footer {
+            grid-area: footer;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
         h1 {
-            font-size: 50px;
+            font-size: 40px;
             margin-bottom: 20px;
         }
         .ticket-image {
@@ -28,91 +69,91 @@
             max-width: 300px;
             height: auto;
             margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
         }
         .buy-button {
-            background-color: #ff6600;
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--text-color);
             padding: 15px 30px;
             font-size: 20px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
         .buy-button:hover {
-            background-color: #cc5200;
+            background-color: var(--accent-color);
+            transform: scale(1.05);
         }
         .form-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
         }
         input {
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
-            border: none;
+            border: 1px solid var(--primary-color);
+            background-color: #f8f8f8;
         }
         #paypal-button-container {
             min-height: 50px;
         }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 30px;
-            }
-            .ticket-image {
-                width: 80%;
-            }
-            .form-container input {
-                font-size: 14px;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
-    <script src="https://www.paypal.com/sdk/js?client-id=Ac-ggpBlGIl1NwfPU39M8OWVgv68Vs3kawypHR634azk-VirzYcUIs2-KEcTquV6TFJ2GEtdR_cvzCwy&currency=EUR"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ac-ggpBlGIl1NwfPU39M8OWVgv68Vs3kawypHR634azk-VirzYcUIs2-KEcTquV6TFJ2GEtdR_cvzCwy&currency=EUR&components=buttons,funding-card" onload="initializePayPal()"></script>
 </head>
 <body>
-    <h1>Island Tickets</h1>
-    <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/47045016-vuoto-biglietto-icona-che-rappresentano-evento-iscrizione-o-lotteria-vettoriale.jpg" alt="Biglietto della lotteria" class="ticket-image">
-    <div class="form-container">
-        <input type="text" id="name" placeholder="Nome" required>
-        <input type="text" id="surname" placeholder="Cognome" required>
-        <input type="date" id="dob" placeholder="Data di nascita" required>
-        <input type="tel" id="phone" placeholder="Numero di telefono" required>
-        <input type="email" id="email" placeholder="Indirizzo email" required>
-    </div>
-    <div id="paypal-button-container"></div>
-
+    <header>
+        <h1>Prova Amex</h1>
+        <p>Compra un ticket e vinci un iPhone 16 Pro!</p>
+    </header>
+    <main>
+        <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/47045016-vuoto-biglietto-icona-che-rappresentano-evento-iscrizione-o-lotteria-vettoriale.jpg" alt="Biglietto della lotteria" class="ticket-image">
+        <div class="form-container">
+            <input type="text" id="name" placeholder="Nome" required>
+            <input type="text" id="surname" placeholder="Cognome" required>
+            <input type="date" id="dob" placeholder="Data di nascita" required>
+            <input type="tel" id="phone" placeholder="Numero di telefono" required>
+            <input type="email" id="email" placeholder="Indirizzo email" required>
+        </div>
+        <div id="paypal-button-container"></div>
+    </main>
+    <footer>
+        <p>© 2025 Prova Amex. Tutti i diritti riservati.</p>
+    </footer>
     <script>
-        let ticketNumber = 104;
-
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '10.00' // Prezzo del biglietto
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    const name = document.getElementById('name').value;
-                    const surname = document.getElementById('surname').value;
-                    const dob = document.getElementById('dob').value;
-                    const phone = document.getElementById('phone').value;
-                    const email = document.getElementById('email').value;
-                    
-                    if (!name || !surname || !dob || !phone || !email) {
-                        alert('Per favore, compila tutti i campi.');
-                        return;
+        function initializePayPal() {
+            if (typeof paypal !== 'undefined') {
+                paypal.Buttons({
+                    fundingSource: paypal.FUNDING.CARD,
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: '10.00'
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            alert('Pagamento completato con successo da ' + details.payer.name.given_name);
+                        });
                     }
-
-                    alert(`Biglietto acquistato! Numero: ${ticketNumber}\nNome: ${name} ${surname}\nEmail: ${email}`);
-                    ticketNumber++;
-                });
+                }).render('#paypal-button-container');
+            } else {
+                console.error('PayPal SDK non è stato caricato correttamente.');
             }
-        }).render('#paypal-button-container');
+        }
     </script>
 </body>
 </html>
