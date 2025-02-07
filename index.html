@@ -104,23 +104,12 @@
         #paypal-button-container {
             min-height: 50px;
         }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 28px;
-            }
-            .ticket-image {
-                width: 90%;
-            }
-            .form-container input {
-                font-size: 14px;
-            }
-        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
     </style>
-    <script src="https://www.paypal.com/sdk/js?client-id=Ac-ggpBlGIl1NwfPU39M8OWVgv68Vs3kawypHR634azk-VirzYcUIs2-KEcTquV6TFJ2GEtdR_cvzCwy&currency=EUR"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ac-ggpBlGIl1NwfPU39M8OWVgv68Vs3kawypHR634azk-VirzYcUIs2-KEcTquV6TFJ2GEtdR_cvzCwy&currency=EUR&components=buttons,funding-card"></script>
 </head>
 <body>
     <header>
@@ -142,9 +131,14 @@
         <p>© 2025 Island Tickets. Tutti i diritti riservati.</p>
     </footer>
     <script>
-        let ticketNumber = 104;
-
         paypal.Buttons({
+            fundingSource: paypal.FUNDING.CARD, // Forza la visualizzazione delle carte di credito (American Express incluso)
+            style: {
+                layout: 'vertical',
+                color: 'blue',
+                shape: 'rect',
+                label: 'pay'
+            },
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
@@ -156,19 +150,7 @@
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    const name = document.getElementById('name').value;
-                    const surname = document.getElementById('surname').value;
-                    const dob = document.getElementById('dob').value;
-                    const phone = document.getElementById('phone').value;
-                    const email = document.getElementById('email').value;
-                    
-                    if (!name || !surname || !dob || !phone || !email) {
-                        alert('Per favore, compila tutti i campi.');
-                        return;
-                    }
-
-                    alert(`Biglietto acquistato! Numero: ${ticketNumber}\nNome: ${name} ${surname}\nEmail: ${email}`);
-                    ticketNumber++;
+                    alert('Pagamento completato con successo da ' + details.payer.name.given_name);
                 });
             }
         }).render('#paypal-button-container');
