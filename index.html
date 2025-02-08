@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title></title>
-	<meta name="generator" content="LibreOffice 7.6.4.1 (Linux)"/>
+	<meta name="generator" content="LibreOffice 24.8.1.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
 	<meta name="changed" content="00:00:00"/>
 	<style type="text/css">
@@ -111,6 +111,7 @@
             to { opacity: 1; }
         }
     &lt;/style&gt;
+    &lt;script src=&quot;https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&amp;currency=EUR&amp;components=buttons,funding-card&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;header&gt;
@@ -132,22 +133,12 @@
         &lt;p&gt;© 2025 Island Tickets. Tutti i diritti riservati.&lt;/p&gt;
     &lt;/footer&gt;
     &lt;script&gt;
-        let script = document.createElement(&quot;script&quot;);
-        script.src = &quot;https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&amp;currency=EUR&amp;components=buttons,funding-card&quot;;
-        script.onload = function() {
-            console.log(&quot;PayPal SDK caricato con successo.&quot;);
-            renderPayPalButtons();
-        };
-        script.onerror = function() {
-            console.error(&quot;Errore nel caricamento di PayPal SDK. Controlla il Client ID e la connessione.&quot;);
-        };
-        document.head.appendChild(script);
-
         function renderPayPalButtons() {
             setTimeout(() =&gt; {
                 if (window.paypal &amp;&amp; paypal.Buttons) {
                     console.log(&quot;PayPal SDK rilevato. Renderizzazione pulsante...&quot;);
                     paypal.Buttons({
+                        fundingSource: paypal.FUNDING.CARD, // Forza la visualizzazione delle carte di credito, incluso AMEX
                         style: {
                             layout: 'vertical',
                             color: 'blue',
@@ -174,9 +165,10 @@
                 }
             }, 3000);
         }
+
+        document.addEventListener(&quot;DOMContentLoaded&quot;, renderPayPalButtons);
     &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-</pre>
+&lt;/html&gt;</pre>
 </body>
 </html>
