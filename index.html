@@ -1,28 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 24.8.1.2 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="00:00:00"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
-		pre { background: transparent }
-		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
-		pre.cjk { font-family: "NSimSun", monospace; font-size: 10pt }
-		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
-	</style>
-</head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre class="western">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, viewport-fit=cover&quot;&gt;
-    &lt;title&gt;Island Tickets&lt;/title&gt;
-    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-    &lt;style&gt;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Island Tickets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
         :root {
             --primary-color: #6C63FF;
             --secondary-color: #2E2C54;
@@ -39,9 +22,9 @@
             display: grid;
             grid-template-rows: auto 1fr auto;
             grid-template-areas:
-                &quot;header&quot;
-                &quot;main&quot;
-                &quot;footer&quot;;
+                "header"
+                "main"
+                "footer";
             height: 100vh;
         }
         header {
@@ -88,6 +71,21 @@
             margin-bottom: 20px;
             animation: fadeIn 1s ease-in-out;
         }
+        .buy-button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .buy-button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.05);
+        }
         .form-container {
             display: flex;
             flex-direction: column;
@@ -106,69 +104,74 @@
         #paypal-button-container {
             min-height: 50px;
         }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+            .ticket-image {
+                width: 90%;
+            }
+            .form-container input {
+                font-size: 14px;
+            }
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-    &lt;/style&gt;
-    &lt;script src=&quot;https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&amp;currency=EUR&amp;components=buttons,funding-card&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;header&gt;
-        &lt;h1&gt;Island Tickets&lt;/h1&gt;
-        &lt;p&gt;Compra un ticket e vinci un iPhone 16 Pro!&lt;/p&gt;
-    &lt;/header&gt;
-    &lt;main&gt;
-        &lt;img src=&quot;https://static.vecteezy.com/ti/vettori-gratis/p1/47045016-vuoto-biglietto-icona-che-rappresentano-evento-iscrizione-o-lotteria-vettoriale.jpg&quot; alt=&quot;Biglietto della lotteria&quot; class=&quot;ticket-image&quot;&gt;
-        &lt;div class=&quot;form-container&quot;&gt;
-            &lt;input type=&quot;text&quot; id=&quot;name&quot; placeholder=&quot;Nome&quot; required&gt;
-            &lt;input type=&quot;text&quot; id=&quot;surname&quot; placeholder=&quot;Cognome&quot; required&gt;
-            &lt;input type=&quot;date&quot; id=&quot;dob&quot; placeholder=&quot;Data di nascita&quot; required&gt;
-            &lt;input type=&quot;tel&quot; id=&quot;phone&quot; placeholder=&quot;Numero di telefono&quot; required&gt;
-            &lt;input type=&quot;email&quot; id=&quot;email&quot; placeholder=&quot;Indirizzo email&quot; required&gt;
-        &lt;/div&gt;
-        &lt;div id=&quot;paypal-button-container&quot;&gt;&lt;/div&gt;
-    &lt;/main&gt;
-    &lt;footer&gt;
-        &lt;p&gt;© 2025 Island Tickets. Tutti i diritti riservati.&lt;/p&gt;
-    &lt;/footer&gt;
-    &lt;script&gt;
-        function renderPayPalButtons() {
-            setTimeout(() =&gt; {
-                if (window.paypal &amp;&amp; paypal.Buttons) {
-                    console.log(&quot;PayPal SDK rilevato. Renderizzazione pulsante...&quot;);
-                    paypal.Buttons({
-                        fundingSource: paypal.FUNDING.CARD, // Forza la visualizzazione delle carte di credito, incluso AMEX
-                        style: {
-                            layout: 'vertical',
-                            color: 'blue',
-                            shape: 'rect',
-                            label: 'pay'
-                        },
-                        createOrder: function(data, actions) {
-                            return actions.order.create({
-                                purchase_units: [{
-                                    amount: {
-                                        value: '10.00'
-                                    }
-                                }]
-                            });
-                        },
-                        onApprove: function(data, actions) {
-                            return actions.order.capture().then(function(details) {
-                                alert('Pagamento completato con successo da ' + details.payer.name.given_name);
-                            });
-                        }
-                    }).render('#paypal-button-container');
-                } else {
-                    console.error(&quot;PayPal SDK non caricato.&quot;);
-                }
-            }, 3000);
-        }
+    </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ac-ggpBlGIl1NwfPU39M8OWVgv68Vs3kawypHR634azk-VirzYcUIs2-KEcTquV6TFJ2GEtdR_cvzCwy&currency=EUR"></script>
+</head>
+<body>
+    <header>
+        <h1>Island Tickets</h1>
+        <p>Compra un ticket e vinci un iPhone 16 Pro!</p>
+    </header>
+    <main>
+        <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/47045016-vuoto-biglietto-icona-che-rappresentano-evento-iscrizione-o-lotteria-vettoriale.jpg" alt="Biglietto della lotteria" class="ticket-image">
+        <div class="form-container">
+            <input type="text" id="name" placeholder="Nome" required>
+            <input type="text" id="surname" placeholder="Cognome" required>
+            <input type="date" id="dob" placeholder="Data di nascita" required>
+            <input type="tel" id="phone" placeholder="Numero di telefono" required>
+            <input type="email" id="email" placeholder="Indirizzo email" required>
+        </div>
+        <div id="paypal-button-container"></div>
+    </main>
+    <footer>
+        <p>© 2025 Island Tickets. Tutti i diritti riservati.</p>
+    </footer>
+    <script>
+        let ticketNumber = 104;
 
-        document.addEventListener(&quot;DOMContentLoaded&quot;, renderPayPalButtons);
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '10.00' // Prezzo del biglietto
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    const name = document.getElementById('name').value;
+                    const surname = document.getElementById('surname').value;
+                    const dob = document.getElementById('dob').value;
+                    const phone = document.getElementById('phone').value;
+                    const email = document.getElementById('email').value;
+                    
+                    if (!name || !surname || !dob || !phone || !email) {
+                        alert('Per favore, compila tutti i campi.');
+                        return;
+                    }
+
+                    alert(`Biglietto acquistato! Numero: ${ticketNumber}\nNome: ${name} ${surname}\nEmail: ${email}`);
+                    ticketNumber++;
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
 </body>
 </html>
