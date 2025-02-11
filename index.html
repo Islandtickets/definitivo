@@ -7,30 +7,33 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&currency=EUR"></script>
 </head>
 <body>
-    <h2>Paga 50€ con PayPal</h2>
+
+    <h2>Effettua il pagamento di 60€</h2>
     <div id="paypal-button-container"></div>
-    
+
     <script>
         paypal.Buttons({
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '50.00'
+                            value: '60.00' // Importo del pagamento
                         }
                     }]
                 });
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    alert('Pagamento completato con successo da ' + details.payer.name.given_name);
+                    alert('Pagamento completato da ' + details.payer.name.given_name);
+                    // Qui puoi reindirizzare l'utente o salvare i dati del pagamento
                 });
             },
             onError: function(err) {
-                console.error('Errore nel pagamento:', err);
-                alert('Si è verificato un errore durante il pagamento. Riprova.');
+                console.error('Errore durante il pagamento:', err);
+                alert('Si è verificato un errore durante il pagamento.');
             }
         }).render('#paypal-button-container');
     </script>
+
 </body>
 </html>
