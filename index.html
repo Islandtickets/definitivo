@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento con PayPal</title>
-    <script src="https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&currency=EUR&components=buttons,funding-eligibility"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AUSni9hfJJx6vFjPF66bkUYhfKDV_bcyV2g8gAJs_m3OHIy2Ly9QvJ5lzV_zts8MFpNN0t-cRjGBoIs6&currency=EUR&components=buttons,funding-eligibility"></script>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '60.00' // Importo del pagamento
+                            value: '80.00' // Importo del pagamento
                         }
                     }]
                 });
