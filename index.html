@@ -4,36 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento con PayPal</title>
-    <script src="https://www.paypal.com/sdk/js?client-id=AUSni9hfJJx6vFjPF66bkUYhfKDV_bcyV2g8gAJs_m3OHIy2Ly9QvJ5lzV_zts8MFpNN0t-cRjGBoIs6&currency=EUR&components=buttons,funding-eligibility"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AUSni9hfJJx6vFjPF66bkUYhfKDV_bcyV2g8gAJs_m3OHIy2Ly9QvJ5lzV_zts8MFpNN0t-cRjGBoIs6&currency=EUR"></script>
 </head>
 <body>
-
-    <h2>Effettua il pagamento di 60€</h2>
+    <h2>Paga 80€ con PayPal</h2>
     <div id="paypal-button-container"></div>
-
+    
     <script>
         paypal.Buttons({
-            fundingSource: paypal.FUNDING.CARD, // Forza l'opzione "Carta di Credito"
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '80.00' // Importo del pagamento
+                            value: '80.00'
                         }
                     }]
                 });
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    alert('Pagamento completato con successo da ' + details.payer.name.given_name);
+                    alert('Pagamento completato da ' + details.payer.name.given_name);
                 });
-            },
-            onError: function(err) {
-                console.error('Errore durante il pagamento:', err);
-                alert('Errore nel pagamento. Prova un altro metodo.');
             }
         }).render('#paypal-button-container');
     </script>
-
 </body>
 </html>
