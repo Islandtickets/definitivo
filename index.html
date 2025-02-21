@@ -3,34 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagamento con PayPal</title>
-    <script src="https://www.paypal.com/sdk/js?client-id=AdzlJUZiuR-s3A8NJpzvjT-Z-Qp8yDM9MTp3Aw0C6byTV9VVObrrhWzsprJBk9nHVz3eLmELCz1mG4KK&currency=EUR"></script>
+    <title>Island Tickets</title>
+    <style>
+        @import url('https://drive.google.com/file/d/13xZlkreyf9011DV-guWdUtHEqgtZi8xo/view?usp=drive_link');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(to right, #001f3f, #004080);
+            color: white;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+            color: black;
+        }
+        h1 {
+            font-size: 60px;
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: #ffcc00;
+            font-weight: 400;
+        }
+        input, button {
+    display: block;
+    margin: 10px auto;
+    text-align: left;
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: #ffcc00;
+            color: #001f3f;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #e6b800;
+        }
+        #ticket-info {
+            display: none;
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            background: #ffcc00;
+            color: black;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ac-ggpBlGIl1NwfPU39M8OWVgv68Vs3kawypHR634azk-VirzYcUIs2-KEcTquV6TFJ2GEtdR_cvzCwy&currency=EUR"></script>
 </head>
 <body>
-    <h2>Paga 80€ con PayPal</h2>
+    <h1>Island Tickets</h1>
+     <img src="https://i.postimg.cc/pVCWVHV5/Whats-App-Image-2025-02-19-at-21-24-13.jpg">
+    <div class="form-container">
+        <input type="text" id="name" placeholder="Nome" required>
+        <input type="text" id="surname" placeholder="Cognome" required>
+        <input type="date" id="dob" placeholder="Data di nascita" required>
+        <input type="tel" id="phone" placeholder="Numero di telefono" required>
+        <input type="email" id="email" placeholder="Indirizzo email" required>
+    </div>
     <div id="paypal-button-container"></div>
-    
+
     <script>
+        let ticketNumber = 1;
+
         paypal.Buttons({
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: "80.00"
+                            value: '10.00' // Prezzo del biglietto
                         }
                     }]
                 });
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    alert('Pagamento completato da ' + details.payer.name.given_name);
+                    const name = document.getElementById('name').value;
+                    const surname = document.getElementById('surname').value;
+                    const dob = document.getElementById('dob').value;
+                    const phone = document.getElementById('phone').value;
+                    const email = document.getElementById('email').value;
+                    
+                    if (!name || !surname || !dob || !phone || !email) {
+                        alert('Per favore, compila tutti i campi.');
+                        return;
+                    }
+
+                    alert(`Biglietto acquistato! Numero: ${ticketNumber}\nNome: ${name} ${surname}\nEmail: ${email}`);
+                    ticketNumber++;
                 });
-            },
-            onError: function(err) {
-                console.error(err);
-                alert('Si è verificato un errore durante il pagamento.');
             }
         }).render('#paypal-button-container');
+    </script>
+</head>
+<body>
+  
+
+    <script>
+        let ticketCounter = 1;
+        function generateTicket() {
+            if (ticketCounter <= 300) {
+                document.getElementById('ticket-info').style.display = 'block';
+                document.getElementById('ticket-info').innerText = "Il tuo numero di biglietto: " + ticketCounter;
+                ticketCounter++;
+            } else {
+                alert("I biglietti sono esauriti!");
+            }
+        }
     </script>
 </body>
 </html>
